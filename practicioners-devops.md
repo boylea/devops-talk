@@ -22,7 +22,9 @@ build-lists: true
 
 ^ To give a little context as to where I'm coming from, if you're not familiar with New Relic, we're a monitoring company. We're fully SaaS and multi-tenant.
 
-^ As a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data. I've been at New Relic for almost 4 years. I'm coming from a development background, previous to working on my current team at New Relic, I had only released software.
+^ As a member of a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data. I've been at New Relic for almost 4 years. 
+
+^ I'm coming from a development background, previous to working on my current team at New Relic, I had only released software.
 
 ---
 
@@ -50,7 +52,11 @@ ___
 * Owning observability
 * Owning the deployment
 
-^ I've divided the talk into three main themes. These really they aren't clean distinctions and contain a ton of overlap. It's kinda the point in fact, that we're blurring the lines between writing and deploying software.  However, I've hopefully grouped concepts in a way to make discussion a little more clear. I'll also point out that I'm barely going to be able to scratch the surface with just 30 minutes for such a broad topic, but hopefully
+^ I've divided the talk into three main themes. 
+
+^ ...themes...
+
+^ These really they aren't clean distinctions and contain a ton of overlap. It's kinda the point in fact, that we're blurring the lines between writing and deploying software.  However, I've hopefully grouped concepts in a way to make discussion a little more clear. 
 
 ___
 
@@ -120,12 +126,13 @@ ___
 
 ![left](decrepit.jpg)
 
-^ Velocity through reduced time spent fire-fighting
-^ Upgraded Hour TS snapshot mechanism
+^ We're always talking about engineering velocity at New Relic, and really good way to kill your velocity is to spend your time fire-fighting misbehaving services. _Most_ software was the right thing at the time, but we need to recognize when we need to take a time-out to fix or scales things to the next level.
 
 ^ We own a service which would snapshot snapshot state for recovery in failure scenarios. While the way this was implemented worked great at the time, as scale increased it was causing pages and a significant amount of the on-call engineers time. So we moved back feature work on our road map to immediately address the issue. We refactored the service to be more robust and more closely match other architecture in our system which snapshots state.
 
 <!-- https://pixabay.com/photos/grain-elevator-decrepit-farm-880108/ -->
+
+^ we don't have to wait for a service to start paging us to address the snakes nests in our code....
 
 ---
 
@@ -133,11 +140,12 @@ Maintainability is part of velocity
 
 ![](model-ferrari.jpg)
 
-^ Management prioritizes reliability and understands that Maintainability is part of Velocity. Software that is well maintained is easier to extend.
-^ Refactored Transformation service to use FS before extending it (maintainability)
-^ _Most_ software was the right thing at the time
+^ Maintainability is important for velocity and reliability. Software that is well maintained is easier to extend.
+^ Refactored Transformation service to use FS before extending it 
 
 <!-- https://pixabay.com/photos/model-car-ferrari-model-mechanic-2099498/ -->
+
+^ FIXME: Transtition?
 
 ---
 
@@ -159,19 +167,21 @@ Maintainability is part of velocity
 
 ![](https://cdn.pixabay.com/photo/2016/02/28/21/52/athletics-1227646_960_720.jpg)
 
-^ Additionally, they often have better information about what they can do to serve broad goals than central planners
-^ Know which tools to use, and that are suited to the teams skills
+^ Additionally, they often have better information about what they can do to serve broad goals than central planners. Allow the domain experts to know which tools to use, and how to approach a problem
 
-^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design and implementation of their software, and this also includes the tools they use. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. We have a set of architecture notes that include a bunch of "musts" and "shoulds". Such as ..... If you want a violate a "must" you'll need to take your case to the architecture team. But, largely New Relic follows the ethos of allowing engineers to build how they know best (wordsmith).
+^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design and implementation of their software, and this also includes the tools they use. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
+
 ^ This includes architecture, but also process, like how the deal does agile
-^ Avoid being blocked by other teams. Keeps Projects small (sprints? Part of the team autonomy is choosing how to use agile practices). Work around or implement things yourself.
+
+^ Avoid being blocked by other teams. Keeps Projects small . Work around or implement things yourself if necessary. 
 
 <!-- https://pixabay.com/photos/art-school-of-athens-rapha%C3%ABl-1143741/ -->
 <!-- https://pixabay.com/photos/application-business-collaboration-3426397/ -->
 
 
 ^ Danger is duplicated effort, solving same problem multiple times across org. Not only duplicated, but done slightly differently everywhere. Each problem is rife with unnecessarily different details.
-^ Technology choices that aren't maintainable outside that one expert on the team, and don't make sense for the org at large
+
+^ This doesn't always work out the best and we do still have a layer...
 
 ---
 
@@ -179,10 +189,18 @@ Maintainability is part of velocity
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Rowing_Eights_Collegiate.png/800px-Rowing_Eights_Collegiate.png)
 
-^ Communities of practice
-^ The commons : we get this right, sometimes. We've standardized on kafka and have some well-maintained libraries associated with our usage patterns around it. However, there are other libraries that are less well maintained and have no clear owner. This can cause issues when bug fixes need to be made, or when there is disagreement about the direction of where the code should go. I would try to avoid this state of having owner-less software.
+^ of coordination between what projects teams are working on. The Technical product managers for each team negotiate with each other about team roadmaps.
 
-^ example
+^ Communities of practice
+
+^ Often discussed at these CoP meetings is the commons : we get this right, sometimes. We've standardized on kafka and have some well-maintained libraries associated with our usage patterns around it. 
+
+^ example: kafka-clients compacted pattern. bug fixes
+
+^ However, there are other libraries that are less well maintained and have no clear owner. This can cause issues when bug fixes need to be made, or when there is disagreement about the direction of where the code should go. I would try to avoid this state of having owner-less software.
+
+^ In addition to code libraries. An area that should have a single clear owner is for...
+
 <!-- https://pixabay.com/photos/business-cargo-containers-crate-1845350/ -->
 <!-- https://commons.wikimedia.org/wiki/File:Rowing_Eights_Collegiate.png -->
 
@@ -194,9 +212,11 @@ Maintainability is part of velocity
 
 ![](https://cdn.pixabay.com/photo/2016/04/04/14/12/monitor-1307227_960_720.jpg)
 
-^ For infrastructure which all teams will need you should have self-serve supported resources and libraries. Encourage most teams to use these things by making their jobs easier. For example New Relic has a Database team that will run a certain limited set of database types for you and manage the instances and replicas. Teams still own the schema and data.
+^ infrastructure which all teams will need. You should have self-serve supported resources and libraries. Encourage most teams to use these things by making their jobs easier. For example New Relic has a Database team that will run a certain limited set of database types for you and manage the instances and replicas. Teams still own the schema and data.
 
 <!-- https://pixabay.com/illustrations/monitor-binary-binary-system-1307227/ -->
+
+^ FIXME: transtition?
 
 ---
 
@@ -223,16 +243,20 @@ Rotating hero handles distractions
 ^the "hero" who, for a week at a time will work on time-sensitive issues, or maintenance issues to small to warrant a project. This person will also be responsible for fielding support questions. This is typically the same week as on-call. So there is one person on the team who is interruptible, allowing all others on the team to be able to focus on project work.
 
 ^ Downsides to single project work? What if there is not enough to parallelize on?
+
 <!-- https://pixabay.com/photos/woman-super-hero-beautiful-3373173/ -->
+
 ___
 
 # **Owning observability**
 
 ^ Of course sine we're responsible for the whole lifecycle of our software, we are responsible for making sure that we know how it's running, and that we know how we know it's running. That is, we understand our monitoring tools and are confident with the level of coverage we have. We know where to look to determine the health of the system, we know how to dive in and troubleshoot, and have alerts set up to automatically notify us when things go wrong.
 
-^ Observability = thinking about monitoring holistically (I read a definition of observability that said it was monitoring + testing, well ok then)
+^ Observability = thinking about monitoring holistically
 
 ^ Also means understanding you can't have perfect visibility, and being aware of your limitations. Particularly true in high throughput and distributed systems
+
+^ We may approach monitoring from a new different...
 
 ---
 
@@ -241,6 +265,8 @@ ___
 * Development
 * Customer compassion
 * Business intelligence
+
+^ ... motivations. :cycle:
 
 ^ May overlap, in fact it can be good if they do
 
@@ -252,10 +278,12 @@ ___
 * Troubleshooting
 * Capacity
 
-
 ^ This is probably the largest category
+
 ^ Did the thing I released work as expected? Did this refactor in fact not change anything?
+
 ^ What is happening with data flows/state? Errors.
+
 ^ Throughput and resource usage
 
 ---
@@ -285,6 +313,8 @@ ___
 
 ^ Which customers are the largest users of certain services?
 ^ decorate/join with ARR
+
+^ Now that we've established why
 
 ---
 
@@ -402,7 +432,7 @@ Playing nicely with others
 
 # [fit] Alerting
 
-unexpected problems that you need a human to fix
+Unexpected problems that you need a human to fix
 
 <!-- ![](https://cdn.pixabay.com/photo/2015/09/26/19/16/alarm-959592_960_720.jpg) -->
 <!-- ![50%](https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png) -->
@@ -416,12 +446,37 @@ unexpected problems that you need a human to fix
 ^ If you're missing a signal you have the power to add it
 ^ Every week we review all the off hours pages for the week
 
-^ A few months ago we added monitoring for sigkills.. mention that sigkills are related to auto-deploys.
+^ Alerts are for humans, when something went wrong and requires thought to dig in and resolve. Any alert with a clearly defined runbook response should be automated away. Alerts should be actionable. It's been said many times before, but bears repeating since it still seems to be an issue. Mercilessly squish ...
+
 
 <!-- ^ Ahead of the curve on alerting: partition ownership, sigkills, auto-commit failure -->
- 
 <!-- https://pixabay.com/photos/alarm-light-siren-emergency-959592/ -->
 <!-- https://pixabay.com/photos/fire-truck-volunteer-firefighter-4012105/ -->
+
+---
+
+# [fit] Squish False Alerts
+
+* Add allowed lateness
+* Tune to be more or less specific
+* Replace the alert
+* Delete the alert
+
+^ ... false positive alerts. If you're getting false positives because of late monitoring data, just wait longer. Alerts should be set up for response on human time scales on the order of minutes in the fastest case, if you're needing to have a human respond. This can mean tuning the alert to be more or less specific as appropriate; Getting rid of the alert altogether - you may want to consider what other signals you could use to alert on the the thing, the actual impact. 
+
+^ We squished a noisy alert just last week on my team, we had set up a baseline alert on some traffic to detect swings in traffic that may indicate our service was losing or duplicating data. Well, it turns out the traffic to this service is actually pretty volatile and was not a good candidate for this type of alerting. So we deleted it. We added some other simpler rules that would just make sure there was a minimum flow per instance, and added another signal that would help us determine if there had been data duplication.
+
+^ Every week....
+
+---
+
+Add missing signals for alerts. FIXME: Needs more pithy
+
+^ One of the great advantages to this ownership model is that the team getting paged has the power to add a signal, some extra monitoring, when it's missing. This can help with squishing false alerts, and also filling in gaps you discover.
+
+^ A few months ago we added monitoring for sigkills.. (mention that sigkills are related to auto-deploys.)
+
+^ So now you've got good, low noise, alerts coverage, what do you do when you get paged? TYou need to communicate efficiently with other involved engineering team and support. And if the impact is large enough, organization leadership as well.
 
 ---
 
@@ -454,10 +509,14 @@ Don't Repeat Incidents
 
 ![fit](https://cdn.pixabay.com/photo/2016/03/31/19/42/circle-icons-1295218_960_720.png)
 
-^ History?
 ^ Highest priority work
-^ DRI and dealing with cruft are two parts of being empowered to fix your stuff and must be a part of DevOps and software ownership. You can't expect teams to own this stuff if they aren't allowed to fix it. If a team doesn't feel like they can maintain their service they don't really own it.
+^ DRI and dealing with cruft are two parts of being empowered to fix your stuff and must be a part of DevOps and software ownership. 
 
+___
+
+You can't expect teams to own this stuff if they aren't allowed to fix it 
+
+^ You can't expect teams to own this stuff if they aren't allowed to fix it. If a team doesn't feel like they can maintain their service they don't really own it.
 
 <!-- https://pixabay.com/vectors/circle-icons-dragon-ring-snake-1295218/ -->
 
@@ -472,9 +531,13 @@ Don't Repeat Incidents
 * Don't repeat incidents
 * Autonomy requires effective collaboration
 -->
+
 ---
 
 # **Ownership**
+
+^ So to review a few of the main take-aways from his talk...
+^ Ownership of one's work increases the team productivity and morale and makes for more reliable software.
 
 ---
 
