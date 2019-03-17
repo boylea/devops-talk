@@ -22,7 +22,7 @@ build-lists: true
 
 ^ To give a little context as to where I'm coming from, if you're not familiar with New Relic, we're a monitoring company. We're fully SaaS and multi-tenant.
 
-^ As a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data.
+^ As a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data. I've been at New Relic for almost 4 years. I'm coming from a development background, previous to working on my current team at New Relic, I had only released software.
 
 ---
 
@@ -50,7 +50,7 @@ ___
 * Owning observability
 * Owning the deployment
 
-^ I've divided the talk into three main themes. These really they aren't clean distinctions and contain a ton of overlap. It's kinda the point in fact, that we're blurring the lines between writing and deploying software.  However, I've hopefully grouped concepts in a way to make discussion a little more clear.
+^ I've divided the talk into three main themes. These really they aren't clean distinctions and contain a ton of overlap. It's kinda the point in fact, that we're blurring the lines between writing and deploying software.  However, I've hopefully grouped concepts in a way to make discussion a little more clear. I'll also point out that I'm barely going to be able to scratch the surface with just 30 minutes for such a broad topic, but hopefully
 
 ___
 
@@ -82,7 +82,7 @@ ___
 # Designing for resiliency
 
 
-^ At New Relic we care very much about reliability. We not a "move fast and break things company", more of a "swiftly and safely". When software teams are on-call they have a very tangible stake in the resiliency of their software. Teams know what the toil feels like and don't want to waste their time on it. 
+^ At New Relic we care very much about reliability. We're not a "move fast and break things company", more of a "swiftly and safely". When software teams are on-call they have a very tangible stake in the resiliency of their software. Teams know what the toil feels like and don't want to waste their time on it. 
 
 ^ This can provide a negative feedback loop.  It's like your body, when you're sick...
 
@@ -103,7 +103,7 @@ ___
 ![](http://res.publicdomainfiles.com/pdf_view/35/13515677414616.jpg)
 
 
-^ ... seat belt on by making have replicas, and failovers.
+^ ... seat belt on by setting up data base replicas, and having failovers. 
 
 <!-- ^ Don't always get this right. When you're the same people dealing with your mistakes in the wild you can learn faster.... -->
 
@@ -180,9 +180,9 @@ Maintainability is part of velocity
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Rowing_Eights_Collegiate.png/800px-Rowing_Eights_Collegiate.png)
 
 ^ Communities of practice
-^ The commons : we get this right, sometimes. While we've standardized on kafka and some wrapper libraries around that, we've all implemented
+^ The commons : we get this right, sometimes. We've standardized on kafka and have some well-maintained libraries associated with our usage patterns around it. However, there are other libraries that are less well maintained and have no clear owner. This can cause issues when bug fixes need to be made, or when there is disagreement about the direction of where the code should go. I would try to avoid this state of having owner-less software.
 
-^ example}
+^ example
 <!-- https://pixabay.com/photos/business-cargo-containers-crate-1845350/ -->
 <!-- https://commons.wikimedia.org/wiki/File:Rowing_Eights_Collegiate.png -->
 
@@ -413,8 +413,8 @@ unexpected problems that you need a human to fix
 ^ Automate away anything expected/with a clear runbook
 ^ Mercilessly squish false positives : baselines example; Partitioner errors
 ^ Every week we count the number of pages and how many were actionable
-^ Every week we review all the off hours pages for the week
 ^ If you're missing a signal you have the power to add it
+^ Every week we review all the off hours pages for the week
 
 ^ A few months ago we added monitoring for sigkills.. mention that sigkills are related to auto-deploys.
 
@@ -477,25 +477,22 @@ Don't Repeat Incidents
 # **Ownership**
 
 ---
-[.header: text-scale(1.5)]
 
-# Owning software architecture and project work
+# **Owning software architecture and project work**
 
 * Treat maintainability as reliability
 * Autonomy requires effective collaboration
 
 ---
-[.header: text-scale(1.5)]
 
-# Owning observability
+# **Owning observability**
 
 * Build monitoring into your system
 * Share monitoring between teams
 
 ---
-[.header: text-scale(1.5)]
 
-# Owning the deployment
+# **Owning the deployment**
 
 * Mercilessly squish false positive alerts
 * Don't repeat incidents
