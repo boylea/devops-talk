@@ -145,7 +145,7 @@ Maintainability is part of velocity
 
 <!-- https://pixabay.com/photos/model-car-ferrari-model-mechanic-2099498/ -->
 
-^ FIXME: Transtition?
+^ In addition to a strong support of reliability, a complementary philosophy is team ...
 
 ---
 
@@ -153,7 +153,7 @@ Maintainability is part of velocity
 
 ![](school-of-athens.jpg)
 
-^ Teams work better and have higher morale when they can make their own decisions about how to do their work
+^ Autonomy (and a necessary framework for collaboration). Teams work better and have higher morale when they can make their own decisions about how to do their work
 
 ^ When you have autonomy it does mean that you need to make an intentional effort to avoid the siloing and duplication of engineering effort
 
@@ -169,9 +169,7 @@ Maintainability is part of velocity
 
 ^ Additionally, they often have better information about what they can do to serve broad goals than central planners. Allow the domain experts to know which tools to use, and how to approach a problem
 
-^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design and implementation of their software, and this also includes the tools they use. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
-
-^ This includes architecture, but also process, like how the deal does agile
+^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design of their software, and this also includes the tools they use and processes at the team level. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
 
 ^ Avoid being blocked by other teams. Keeps Projects small . Work around or implement things yourself if necessary. 
 
@@ -216,14 +214,13 @@ Maintainability is part of velocity
 
 <!-- https://pixabay.com/illustrations/monitor-binary-binary-system-1307227/ -->
 
-^ FIXME: transtition?
+Before moving on to the next section, I'd like to talk about one guideline all teams at New Relic are strongly encouraged to follow...
 
 ---
 
 Work on one thing at a time
 
 ![](many-thoughts-overwhelmed.jpg)
-
 
 ^ Have one active project at a time. It might be feature work, or scaling work or technical debt refactoring work. Everyone is working on the same project, keeps the time to delivery shorter so you can start getting feedback on things sooner and realizing the value sooner. 
 
@@ -439,13 +436,6 @@ Unexpected problems that you need a human to fix
 
 ![inline, fit](https://cdn.pixabay.com/photo/2019/02/21/19/52/fire-truck-4012105_960_720.png)
 
-^ Set this up for human time scales
-^ Automate away anything expected/with a clear runbook
-^ Mercilessly squish false positives : baselines example; Partitioner errors
-^ Every week we count the number of pages and how many were actionable
-^ If you're missing a signal you have the power to add it
-^ Every week we review all the off hours pages for the week
-
 ^ Alerts are for humans, when something went wrong and requires thought to dig in and resolve. Any alert with a clearly defined runbook response should be automated away. Alerts should be actionable. It's been said many times before, but bears repeating since it still seems to be an issue. Mercilessly squish ...
 
 
@@ -462,21 +452,25 @@ Unexpected problems that you need a human to fix
 * Replace the alert
 * Delete the alert
 
-^ ... false positive alerts. If you're getting false positives because of late monitoring data, just wait longer. Alerts should be set up for response on human time scales on the order of minutes in the fastest case, if you're needing to have a human respond. This can mean tuning the alert to be more or less specific as appropriate; Getting rid of the alert altogether - you may want to consider what other signals you could use to alert on the the thing, the actual impact. 
+^ ... false positive alerts. If you're getting false positives because of late monitoring data, just wait longer. Alerts should be set up for response on human time scales, if you're needing to have a human respond, they are going to do so on the order of minutes in the fastest case. 
+
+^ Alternatively, you may need to tune the alert to be more or less specific as appropriate; Getting rid of the alert altogether - you may want to consider what other signals you could use to alert on the the thing, the actual impact. Sometimes you just need to straight up delete the alert. It is not worth the cost of alert fatigue, when all your alerts then become less effective.
+
+^ Every week we count the number of pages and how many were actionable. we review all the off hours pages for the week
 
 ^ We squished a noisy alert just last week on my team, we had set up a baseline alert on some traffic to detect swings in traffic that may indicate our service was losing or duplicating data. Well, it turns out the traffic to this service is actually pretty volatile and was not a good candidate for this type of alerting. So we deleted it. We added some other simpler rules that would just make sure there was a minimum flow per instance, and added another signal that would help us determine if there had been data duplication.
 
-^ Every week....
 
----
+<!--
 
 Add missing signals for alerts. FIXME: Needs more pithy
 
 ^ One of the great advantages to this ownership model is that the team getting paged has the power to add a signal, some extra monitoring, when it's missing. This can help with squishing false alerts, and also filling in gaps you discover.
 
 ^ A few months ago we added monitoring for sigkills.. (mention that sigkills are related to auto-deploys.)
+ -->
 
-^ So now you've got good, low noise, alerts coverage, what do you do when you get paged? TYou need to communicate efficiently with other involved engineering team and support. And if the impact is large enough, organization leadership as well.
+^ So now you've got good, low noise, alerts coverage, what do you do when you get paged? You need to communicate efficiently with others involved engineering team and support. And if the impact is large enough, organization leadership as well.
 
 ---
 
