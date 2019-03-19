@@ -73,7 +73,10 @@ ___
 
 ^ We have an architecture team that is in charge of Platform/company-wide software architecture. Teams are in charge of building their piece of the system. They all have an architect to work with, who will be available as a resource and to ensure that the system as a whole is put together well.
 
-^ We frequently have design meetings as a team in advance of starting project. Everyone on the team get a chance to weight in and participate. This is great for multiple reasons. One, engineer morale and engagement. Everyone on the team gets to feel a greater sense of ownership and accomplishment when they get to shape the work. Two folks from different backgrounds and different levels in their careers bring different perspectives to the table. A more junior engineer may ask a seemlying "basic" question that causes you to question your assumptions. Three is that it's part of leveling up the more junior members of the team. They get to see the thought process that goes into developing software architecture (including all the bad ideas and wrong directions), instead of just having it handed down already "figured out".
+^ We frequently have design meetings as a team in advance of starting project. Everyone on the team get a chance to weight in and participate. This is great for multiple reasons. 
+    1. Engineer morale and engagement. Everyone on the team gets to feel a greater sense of ownership and accomplishment when they get to shape the work. 
+    2. Folks from different backgrounds and different levels in their careers bring different perspectives to the table. A more junior engineer may ask a seemingly "basic" question that causes you to challenge your assumptions. 
+    3. Three is that it's part of leveling the less experienced members of the team. They get to see the thought process that goes into developing software architecture (including all the bad ideas and wrong directions), instead of just having it handed down already "figured out".
 
 <!-- ^ Longer term planning is owned by the team tech lead and architect -->
 
@@ -128,7 +131,7 @@ ___
 
 ^ We're always talking about engineering velocity at New Relic, and really good way to kill your velocity is to spend your time fire-fighting misbehaving services. _Most_ software was the right thing at the time, but we need to recognize when we need to take a time-out to fix or scales things to the next level.
 
-^ We own a service which would snapshot snapshot state for recovery in failure scenarios. While the way this was implemented worked great at the time, as scale increased it was causing pages and a significant amount of the on-call engineers time. So we moved back feature work on our road map to immediately address the issue. We refactored the service to be more robust and more closely match other architecture in our system which snapshots state.
+^ We own a service which would snapshot snapshot state for recovery in failure scenarios. Over time, as scale increased it was causing pages and a significant amount of the on-call engineers time. So we moved back feature work on our road map to immediately address the issue. We refactored the service to be more robust and more closely match other architecture in our system which snapshots state.
 
 <!-- https://pixabay.com/photos/grain-elevator-decrepit-farm-880108/ -->
 
@@ -180,7 +183,7 @@ Maintainability is part of velocity
 
 ^ Danger is duplicated effort, solving same problem multiple times across org. Not only duplicated, but done slightly differently everywhere. Each solution is rife with unnecessarily different details.
 
-^ This doesn't always work out the best and we do still have a layer...
+^ So we mitigate this with a layer...
 
 ---
 
@@ -192,11 +195,11 @@ Maintainability is part of velocity
 
 ^ Communities of practice
 
-^ Often discussed at these CoP meetings is the commons : we get this right, sometimes. We've standardized on kafka and have some well-maintained libraries associated with our usage patterns around it. 
+^ Often discussed at these CoP meetings is the commons. We've standardized on kafka and have some well-maintained libraries associated with our usage patterns around it.
 
 ^ example: kafka-clients compacted pattern. bug fixes
 
-^ However, there are other libraries that are less well maintained and have no clear owner. This can cause issues when bug fixes need to be made, or when there is disagreement about the direction of where the code should go. I would try to avoid this state of having owner-less software.
+^ honestly, this isn't something that always works out well for us. There are other libraries that are less well maintained and have no clear owner. This can cause issues when bug fixes need to be made, or when there is disagreement about the direction of where the code should go. I would try to avoid this state of having owner-less software.
 
 ^ In addition to code libraries. An area that should have a single clear owner is for...
 
@@ -227,7 +230,9 @@ Work on one thing at a time
 
 ^ Have one active project at a time. It might be feature work, or scaling work or technical debt refactoring work. Everyone is working on the same project, keeps the time to delivery shorter so you can start getting feedback on things sooner and realizing the value sooner. 
 
-^ Additionally it keeps the whole team in the same context which helps for collaborating on solutions and keeping the on-call up to date with recent changes. Team members avoid costly context switching trying to keep up with what the other folks on the team are working on for code reviews. It also avoid the knowledge silos you can get one each person has their own project. I've found it also tend to be more enjoyable. No one person gets "stuck" working on something, or no one person get to work on the exciting or high-profile project. The team is in it together.
+^ 1. Additionally it keeps the whole team in the same context which helps for collaborating on solutions and keeping the on-call up to date with recent changes. Team members avoid costly context switching trying to keep up with what the other folks on the team are working on for code reviews. 
+2. It also avoid the knowledge silos you can get one each person has their own project. 
+3. I've found it also tend to be more enjoyable. No one person gets "stuck" working on something, or no one person get to work on the exciting or high-profile project. The team is in it together.
 
 ^ There are always small timely tasks that come up and need to be done. We have a rotating role on the team we call ...
 
@@ -339,8 +344,8 @@ ___
 
 Keep monitoring asynchronous
 
-^ e.g. MEE. Monitoring should be unobtrusive. Strive to keep it's impact small, do as little as possible in the hot path that will add to the latency experienced by customers. Extra processing and sends should happen in a background thread.
-^ We make heavy use of APIs and custom instrumentation and keep this in mind.
+^ Monitoring should be unobtrusive. Strive to keep it's impact small, do as little as possible in the hot path that will add to the latency experienced by customers. Extra processing and sends should happen in a background thread.
+^ We make heavy use of APIs and custom instrumentation and keep this in mind. e.g. MEE
 ^ Of course the New Relic agents are built upon this principle as well. I used to work on the Python Agent team, and doing the least amount of work possible while in the application code path was a foremost principle
 
 ---
@@ -349,7 +354,14 @@ Keep monitoring asynchronous
 
 Metrics, Events, Logs, Traces
 
+![](https://farm1.staticflickr.com/122/262810485_0497847bca_b.jpg)
+
+[.footer: Peter Becker / http://bit.ly/2HGkaN5 / CC-BY]
+[.footer-style: #2F2F2F, text-scale(0.8), alignment(right)]
+
 ^ Use the right data type for the thing you're monitoring
+
+<!-- https://www.flickr.com/photos/peterbecker/262810485 -->
 
 ___
 
@@ -388,7 +400,7 @@ ___
 
 Metrics, Events, Logs, Traces
 
-^ You'll use a combination of these things, with a mix that makes sense to you. On my teams we use events very heavily and have a plenty of metrics too.
+^ You'll use a combination of these things, with a mix that makes sense to you.
 
 ___
 
@@ -413,7 +425,9 @@ Shared code? templates? Have your monitoring built into that.
 # **Owning the deployment**
 
 ^ We deploy our changes in frequent small pieces
+
 ^ you should be the first one to know something is wrong with your system
+
 ^ Of course one of the great advantages to DevOps is that shortened troubleshooting loop and reduced MTTR. The team has all the context for debugging issues with their software plus access to and is knowledgeable about the system monitoring.
 
 ---
@@ -423,6 +437,7 @@ Playing nicely with others
 ![](https://cdn.pixabay.com/photo/2019/02/23/18/24/puppy-4016220_960_720.jpg)
 
 ^ GK Lets you know if someone else is having a bad time.
+
 ^ Used to block you when any dependencies were also going at the same time, but this got out of hand.
 
 ^ No matter how much you plan and test, you can never remove fault from your system...
@@ -483,6 +498,7 @@ Incident command
 ![](https://cdn.pixabay.com/photo/2013/06/02/23/13/firefighters-115800_960_720.jpg)
 
 ^ When we're experiencing an SLI violation we go the the #emergency-room to coordinate with other engineering teams and support
+
 ^ We have a whole central process we've put a lot of thought into. Deserves a whole talk, in fact some colleagues have given one titled...
 
 <!-- https://pixabay.com/photos/firefighters-fire-flames-outside-115800/ -->
@@ -498,7 +514,9 @@ ___
 blameless culture fosters collaboration
 
 ^ Blameless incidents: If there is a fear of making mistakes and getting punished folks won't make critical decisions
+
 ^ Blame incentivizes excuses and avoiding the problem for folks who may have the power to fix it
+
 ^ Blameless retros : focus on process
 
 ---
@@ -508,6 +526,7 @@ Don't Repeat Incidents
 ![fit](https://cdn.pixabay.com/photo/2016/03/31/19/42/circle-icons-1295218_960_720.png)
 
 ^ Highest priority work
+
 ^ DRI and dealing with cruft are two parts of being empowered to fix your stuff and must be a part of DevOps and software ownership. 
 
 ___
