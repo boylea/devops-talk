@@ -22,9 +22,9 @@ build-lists: true
 
 ^ To give a little context as to where I'm coming from, if you're not familiar with New Relic, we're a monitoring company. We're fully SaaS and multi-tenant.
 
-^ As a member of a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data. I've been at New Relic for almost 4 years. 
+^ As a member of a platform team, we aren't tied to a particular product, but support other product teams by providing a foundation to store and query customer telemetry data.
 
-^ I'm coming from a development background, previous to working on my current team at New Relic, I had only released software.
+^ I'd like to know about you...
 
 ---
 
@@ -141,7 +141,8 @@ Maintainability is part of velocity
 ![](model-ferrari.jpg)
 
 ^ Maintainability is important for velocity and reliability. Software that is well maintained is easier to extend.
-^ Refactored Transformation service to use FS before extending it 
+
+^ We try to follow a micro-services architecture. However, we had this service that because it was a convenient place to tack features onto, ended up doing 4 things instead of one. We were asked to further extend one of the these things, but at this point, we put the brakes on a little and first took time to extract it into it's own microservice instead of continuing to add complexity to the already overloaded service.
 
 <!-- https://pixabay.com/photos/model-car-ferrari-model-mechanic-2099498/ -->
 
@@ -155,7 +156,7 @@ Maintainability is part of velocity
 
 ^ Autonomy (and a necessary framework for collaboration). Teams work better and have higher morale when they can make their own decisions about how to do their work
 
-^ When you have autonomy it does mean that you need to make an intentional effort to avoid the siloing and duplication of engineering effort
+^ When you have autonomy it does mean that you need to make an intentional effort to avoid improper technology choices, information siloing or duplication of engineering effort that that are risks when you have high team autonomy
 
 ---
 
@@ -167,17 +168,17 @@ Maintainability is part of velocity
 
 ![](https://cdn.pixabay.com/photo/2016/02/28/21/52/athletics-1227646_960_720.jpg)
 
-^ Additionally, they often have better information about what they can do to serve broad goals than central planners. Allow the domain experts to know which tools to use, and how to approach a problem
+^ Teams often have better information about what they can do to serve broad goals than central planners. Allow the domain experts to know which tools to use, and how to approach a problem
 
 ^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design of their software, and this also includes the tools they use and processes at the team level. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
 
-^ Avoid being blocked by other teams. Keeps Projects small . Work around or implement things yourself if necessary. 
+^ Avoid being blocked by other teams. Work around or implement things yourself if necessary. 
 
 <!-- https://pixabay.com/photos/art-school-of-athens-rapha%C3%ABl-1143741/ -->
 <!-- https://pixabay.com/photos/application-business-collaboration-3426397/ -->
 
 
-^ Danger is duplicated effort, solving same problem multiple times across org. Not only duplicated, but done slightly differently everywhere. Each problem is rife with unnecessarily different details.
+^ Danger is duplicated effort, solving same problem multiple times across org. Not only duplicated, but done slightly differently everywhere. Each solution is rife with unnecessarily different details.
 
 ^ This doesn't always work out the best and we do still have a layer...
 
@@ -199,7 +200,6 @@ Maintainability is part of velocity
 
 ^ In addition to code libraries. An area that should have a single clear owner is for...
 
-<!-- https://pixabay.com/photos/business-cargo-containers-crate-1845350/ -->
 <!-- https://commons.wikimedia.org/wiki/File:Rowing_Eights_Collegiate.png -->
 
 ---
@@ -207,14 +207,17 @@ Maintainability is part of velocity
 # Collaboration
 
 <!-- ![](containers.jpg) -->
+<!-- ![](https://cdn.pixabay.com/photo/2016/04/04/14/12/monitor-1307227_960_720.jpg) -->
 
-![](https://cdn.pixabay.com/photo/2016/04/04/14/12/monitor-1307227_960_720.jpg)
+![](https://cdn.pixabay.com/photo/2017/11/08/15/04/computer-2930704_960_720.jpg)
 
 ^ infrastructure which all teams will need. You should have self-serve supported resources and libraries. Encourage most teams to use these things by making their jobs easier. For example New Relic has a Database team that will run a certain limited set of database types for you and manage the instances and replicas. Teams still own the schema and data.
 
+<!-- https://pixabay.com/photos/business-cargo-containers-crate-1845350/ -->
 <!-- https://pixabay.com/illustrations/monitor-binary-binary-system-1307227/ -->
+<!-- https://pixabay.com/illustrations/computer-city-hack-network-digital-2930704/ -->
 
-Before moving on to the next section, I'd like to talk about one guideline all teams at New Relic are strongly encouraged to follow...
+^ Before moving on to the next section, I'd like to talk about one guideline all teams at New Relic are strongly encouraged to follow...
 
 ---
 
@@ -253,7 +256,7 @@ ___
 
 ^ Also means understanding you can't have perfect visibility, and being aware of your limitations. Particularly true in high throughput and distributed systems
 
-^ We may approach monitoring from a new different...
+^ We may approach monitoring from a few different...
 
 ---
 
@@ -377,6 +380,7 @@ ___
 * Traces path across services
 
 ^ Trace the path of a request as it travels across a complex system, connecting the pieces
+^ See where the slow component of your system is
 
 ---
 
@@ -384,13 +388,13 @@ ___
 
 Metrics, Events, Logs, Traces
 
-___
+^ You'll use a combination of these things, with a mix that makes sense to you. On my teams we use events very heavily and have a plenty of metrics too.
 
+___
 
 # Monitoring-first mentality
 
 ^ Monitoring from first commit. If we're spinning up a new service we should be getting the basic health metrics we build into every service from our first push. Add a piece of functionality, ask your self, how do I know this is working?
-^ TDD comparision?
 
 ---
 
@@ -399,10 +403,10 @@ Shared code? templates? Have your monitoring built into that.
 ^ Nos templates, Monitoring code in kafka-clients, MEE
 
 ^ Advantages:
-^     1. Monitoring is build in and already present
-^     2. Reduced effort/ code duplication
-^     3. Shared expertise of how to monitor the thing
-^     4. Common monitoring between teams for better shared understanding
+     1. Monitoring is build in and already present
+     2. Reduced effort/ code duplication
+     3. Shared expertise of how to monitor the thing
+     4. Common monitoring between teams for better shared understanding
 
 ---
 
@@ -508,7 +512,7 @@ Don't Repeat Incidents
 
 ___
 
-You can't expect teams to own this stuff if they aren't allowed to fix it 
+It's not ownership if you're not allowed to fix it
 
 ^ You can't expect teams to own this stuff if they aren't allowed to fix it. If a team doesn't feel like they can maintain their service they don't really own it.
 
