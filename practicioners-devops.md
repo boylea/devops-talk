@@ -44,6 +44,8 @@ ___
 
 ^ At the core of doing devOps well is fostering a sense of ownership. Teams own the whole lifecycle of their software, and suffer the joys and relish the consequences of what they produce. Development teams _want_ to take responsibility for what their application is doing in the wild because they have a sense of ownership end to end in the system. Ownership of one's work increases the team productivity and morale and makes for more reliable software.
 
+^ DevOps is a philosophy. If you're embracing it, this ownership principal applies to all teams the write software.
+
 ___
 
 # Ownership
@@ -300,7 +302,7 @@ ___
 # Customer compassion
 
 * Service quality
-* SLAs
+* SLOs
 
 ![](customer-experience.png)
 
@@ -473,7 +475,11 @@ Unexpected problems that you need a human to fix
 
 ^ ... false positive alerts. If you're getting false positives because of late monitoring data, just wait longer. Alerts should be set up for response on human time scales, if you're needing to have a human respond, they are going to do so on the order of minutes in the fastest case. 
 
-^ Alternatively, you may need to tune the alert to be more or less specific as appropriate; Getting rid of the alert altogether - you may want to consider what other signals you could use to alert on the the thing, the actual impact. Sometimes you just need to straight up delete the alert. It is not worth the cost of alert fatigue, when all your alerts then become less effective.
+^ Alternatively, you may need to tune the alert to be more or less specific as appropriate; 
+
+^ you may want to consider what other signals you could use to alert on the the thing, the actual impact. 
+
+^ Sometimes you just need to straight up delete the alert. It is not worth the cost of alert fatigue, when all your alerts then become less effective.
 
 ^ Every week we count the number of pages and how many were actionable. we review all the off hours pages for the week
 
@@ -517,7 +523,7 @@ blameless culture fosters collaboration
 
 ^ Blame incentivizes excuses and avoiding the problem for folks who may have the power to fix it
 
-^ Blameless retros : focus on process
+^ Blameless retros : define retro; focus on process
 
 ---
 
