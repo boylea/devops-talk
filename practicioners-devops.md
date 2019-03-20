@@ -42,7 +42,7 @@ ___
     
 # **Ownership**
 
-^ At the core of doing devOps well is fostering a sense of ownership. Teams own the whole lifecycle of their software, and suffer the joys and relish the consequences of what they produce. Development teams _want_ to take responsibility for what their application is doing in the wild because they have a sense of ownership end to end in the system. Ownership of one's work increases the team productivity and morale and makes for more reliable software.
+^ At the core of doing devOps well is fostering a sense of ownership. Teams own the whole lifecycle of their software, and suffer the joys and relish the consequences of what they produce. When you have a culture of ownership, development teams _want_ to take responsibility for what their application is doing in the wild because they have a sense of ownership end to end in the system. Ownership of one's work increases the team productivity and morale and makes for more reliable software.
 
 ^ DevOps is a philosophy. If you're embracing it, this ownership principal applies to all teams the write software.
 
@@ -594,3 +594,15 @@ Such information may contain forward-looking statements within the meaning of fe
 Actual results may differ materially from those expressed in these forward-looking statements, which speak only as of the date hereof, and are subject to change at any time without notice. Existing and prospective investors, customers and other third parties transacting business with New Relic are cautioned not to place undue reliance on this forward-looking information. The achievement or success of the matters covered by such forward-looking statements are based on New Relic’s current assumptions, expectations, and beliefs and are subject to substantial risks, uncertainties, assumptions, and changes in circumstances that may cause the actual results, performance, or achievements to differ materially from those expressed or implied in any forward-looking statement. Further information on factors that could affect such forward-looking statements is included in the filings we make with the SEC from time to time. Copies of these documents may be obtained by visiting New Relic’s Investor Relations website at ir.newrelic.com or the SEC’s website at www.sec.gov. 
 
 New Relic assumes no obligation and does not intend to update these forward-looking statements, except as required by law. New Relic makes no warranties, expressed or implied, in this document or otherwise, with respect to the information provided.
+
+---
+[.autoscale: true]
+
+# **Ownership**
+
+* Treat maintainability as reliability
+* Autonomy requires effective collaboration
+* Build monitoring into your system
+* Share monitoring between teams
+* Mercilessly squish false positive alerts
+* Don't repeat incidents
