@@ -525,6 +525,8 @@ blameless culture fosters collaboration
 
 ^ Blameless retros : define retro; focus on process
 
+^ Hostfitter example
+
 ---
 
 Don't Repeat Incidents
