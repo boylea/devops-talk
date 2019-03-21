@@ -7,6 +7,8 @@ build-lists: true
 
 ^ I'm a Lead software Engineer at New Relic working on the Core Data Platform, my team does real-time stream processing on the large amount of data my company ingests. 
 
+^ This talk is a bit of a whirl-wind of some of my favorite things about the way we do DevOps. Hopefully you're going to walk away with some practical tips and a starting point on a bunch of topics that will inspire you to go out and learn more.
+
 ---
 
 ## Every minute New Relic handles:
@@ -18,7 +20,6 @@ build-lists: true
 1000T+ events queried
 
 ![fit left](NewRelic-logo-square-w.png)
-
 
 ^ To give a little context as to where I'm coming from, if you're not familiar with New Relic, we're a monitoring company. We're fully SaaS and multi-tenant.
 
@@ -42,7 +43,7 @@ ___
     
 # **Ownership**
 
-^ At the core of doing devOps well is fostering a sense of ownership. Teams own the whole lifecycle of their software, and suffer the joys and relish the consequences of what they produce. When you have a culture of ownership, development teams _want_ to take responsibility for what their application is doing in the wild because they have a sense of ownership end to end in the system. Ownership of one's work increases the team productivity and morale and makes for more reliable software.
+^ At the core of doing devOps well is fostering a sense of ownership. Teams own the whole lifecycle of their software, and suffer the joys and relish the consequences of what they produce. When you have a culture of ownership, development teams _want_ to take responsibility for what their application is doing in the wild. Ownership of one's work increases the team productivity and morale and makes for more reliable software.
 
 ^ DevOps is a philosophy. If you're embracing it, this ownership principal applies to all teams the write software.
 
@@ -135,9 +136,11 @@ ___
 
 ^ We own a service which would snapshot snapshot state for recovery in failure scenarios. Over time, as scale increased it was causing pages and a significant amount of the on-call engineers time. So we moved back feature work on our road map to immediately address the issue. We refactored the service to be more robust and more closely match other architecture in our system which snapshots state.
 
+^ Management must support, nay encourage
+
 <!-- https://pixabay.com/photos/grain-elevator-decrepit-farm-880108/ -->
 
-^ we don't have to wait for a service to start paging us to address the snakes nests in our code....
+^ we don't have to wait for a service to start paging us to address the cruft in our code....
 
 ---
 
@@ -168,14 +171,15 @@ Maintainability is part of velocity
 # Autonomy
 
 <!-- ![](school-of-athens.jpg) -->
-
 <!-- ![](collaboration.jpg) -->
 
 ![](https://cdn.pixabay.com/photo/2016/02/28/21/52/athletics-1227646_960_720.jpg)
 
 ^ Teams often have better information about what they can do to serve broad goals than central planners. Allow the domain experts to know which tools to use, and how to approach a problem
 
-^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design of their software, and this also includes the tools they use and processes at the team level. At least within reason. There are some rules you need to follow, like you must monitor your software with New Relic, and if you want to introduce new or obscure technologies you'll need to consult with the architecture team first. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
+^ Team autonomy is huge at New Relic. As I've already mentioned teams own the design of their software, and this also includes the tools they use and processes at the team level. At least within reason. Some rules:
+1. Must monitor with NR
+2. Introduce new or obscure, consult with arch. This mitigates technology choices that aren't maintainable outside that one expert or don't make sense for the org at large.
 
 ^ Avoid being blocked by other teams. Work around or implement things yourself if necessary. 
 
@@ -347,7 +351,9 @@ ___
 Keep monitoring asynchronous
 
 ^ Monitoring should be unobtrusive. Strive to keep it's impact small, do as little as possible in the hot path that will add to the latency experienced by customers. Extra processing and sends should happen in a background thread.
+
 ^ We make heavy use of APIs and custom instrumentation and keep this in mind. e.g. MEE
+
 ^ Of course the New Relic agents are built upon this principle as well. I used to work on the Python Agent team, and doing the least amount of work possible while in the application code path was a foremost principle
 
 ---
@@ -360,6 +366,8 @@ Metrics, Events, Logs, Traces
 
 [.footer: Peter Becker / http://bit.ly/2HGkaN5 / CC-BY]
 [.footer-style: #2F2F2F, text-scale(0.8), alignment(right)]
+
+^ We have a few different data types or categories that we can use to recording monitoring data.
 
 ^ Use the right data type for the thing you're monitoring
 
@@ -394,7 +402,8 @@ ___
 * Traces path across services
 
 ^ Trace the path of a request as it travels across a complex system, connecting the pieces
-^ See where the slow component of your system is
+
+^ For us, we're maybe tracing the path of a peice of data as it flows through the system, recording timestamps at application boundaries. When you connect these together, you can see where the slow component of your system is
 
 ---
 
@@ -419,8 +428,8 @@ Shared code? templates? Have your monitoring built into that.
 ^ Advantages:
      1. Monitoring is build in and already present
      2. Reduced effort/ code duplication
-     3. Shared expertise of how to monitor the thing
-     4. Common monitoring between teams for better shared understanding
+     3. Common monitoring between teams for better shared understanding
+     4. Shared expertise of how to monitor the thing
 
 ---
 
@@ -438,13 +447,18 @@ Playing nicely with others
 
 ![](https://cdn.pixabay.com/photo/2019/02/23/18/24/puppy-4016220_960_720.jpg)
 
-^ GK Lets you know if someone else is having a bad time.
+^ We want to make sure that we're not stepping on each other toes, or making and incident worse when we're deploying. xGK Lets you know if someone else is having a bad time.
 
-^ Used to block you when any dependencies were also going at the same time, but this got out of hand.
-
-^ No matter how much you plan and test, you can never remove fault from your system...
+^ Used to block you when any dependencies were also going at the same time, but this got out of hand....
 
 <!-- https://pixabay.com/photos/puppy-labrador-retriever-play-dog-4016220/ -->
+
+---
+
+![](gk-override.png)
+
+
+^ No matter how much you plan and test, you can never remove fault from your system...
 
 ---
 
@@ -519,7 +533,7 @@ ___
 
 blameless culture fosters collaboration
 
-^ Blameless incidents: If there is a fear of making mistakes and getting punished folks won't make critical decisions
+^ Blameless incidents: If there is a fear of making mistakes and getting punished folks won't make critical decisions. Reference Matty
 
 ^ Blame incentivizes excuses and avoiding the problem for folks who may have the power to fix it
 
